@@ -37,7 +37,7 @@ Completados:
 int ft_putchar(char c)//c y %
 {
 	write(1, &c, sizeof(char) * 1);
-	return (c);
+	return (1);
 }
 
 char ft_putstring(char *str)//s
@@ -50,48 +50,58 @@ char ft_putstring(char *str)//s
 		ft_putchar(str[i]);
 		i++;
 	}
-	return (*str);
+	return (i);
 }
 
-void	ft_putnbr(int n)//d o i
+int	ft_putnbr(int n)//d o i
 {
+	int count;
+
+	count = 0;
 	if (n == -2147483648)
 	{
-		ft_putstring("-2147483648");
+		count += ft_putstring("-2147483648");
 	}
 	if(n < 0)
 	{
-		ft_putchar('-');
+		count += ft_putchar('-');
 		n *= -1;
 	}
 	if (n > 9)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		count += ft_putnbr(n / 10);
+		count += ft_putnbr(n % 10);
 	}
 	else
 	{
-		ft_putchar(n + '0');
+		count += ft_putchar(n + '0');
 	}
+	return (count);
 }
 
-void	ft_putnbr_unsigned(unsigned int n)//u
+int	ft_putnbr_unsigned(unsigned int n)//u
 {
+	int count;
+
+	count = 0;
 	if (n > 9)
 	{
-		ft_putnbr_unsigned(n / 10);
-		ft_putnbr_unsigned(n % 10);
+		count += ft_putnbr_unsigned(n / 10);
+		count += ft_putnbr_unsigned(n % 10);
 	}
 	else
 	{
-		ft_putchar(n + '0');
+		count += ft_putchar(n + '0');
 	}
+	return (count);
 }
 
-void	ft_putnbr16(unsigned int n, int uppercase)//x o X
+int	ft_putnbr16(unsigned int n, int uppercase)//x o X
 {
 	char *hex_digits;
+	int count;
 
+	count = 0;
 	if (uppercase == 1)
 	{
 		hex_digits = "0123456789ABCDEF";
@@ -102,23 +112,26 @@ void	ft_putnbr16(unsigned int n, int uppercase)//x o X
 	}
 	if (n >= 16)
 	{
-		ft_putnbr16(n / 16, uppercase);
-		ft_putnbr16(n % 16, uppercase);
+		count += ft_putnbr16(n / 16, uppercase);
+		count += ft_putnbr16(n % 16, uppercase);
 	}
 	else
 	{
-		ft_putchar(hex_digits[n]);
+		count += ft_putchar(hex_digits[n]);
 	}
+	return (count);
 }
 
-void ft_putptr(void *ptr)//p
+int ft_putptr(void *ptr)//p
 {
 	unsigned long long address = (unsigned long long)ptr;
-	ft_putstring("0x");
-	ft_putnbr16(address, 0);
+	int	count;
+
+	count = 0;
+	count += ft_putstring("0x");
+	count += ft_putnbr16(address, 0);
+	return (count);
 }
-
-
 
 int	ft_printf(const char *format,...)
 {
@@ -136,40 +149,42 @@ int	ft_printf(const char *format,...)
 			i++;
 			if (format[i] == 'c')
 			{
-				ft_putchar(va_arg(args, int));
+				count += ft_putchar(va_arg(args, int));
 			}
 			else if (format[i] == 's')
 			{
-				ft_putstring(va_arg(args, char *));
+				count += ft_putstring(va_arg(args, char *));
 			}
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
-				ft_putnbr(va_arg(args, int));
+				count += ft_putnbr(va_arg(args, int));
 			}
 			else if (format[i] == 'u')
 			{
-				ft_putnbr_unsigned(va_arg(args, unsigned int));
+				count += ft_putnbr_unsigned(va_arg(args, unsigned int));
 			}
 			else if (format[i] == 'x')
 			{
-				ft_putnbr16(va_arg(args, unsigned int), 0);
+				count += ft_putnbr16(va_arg(args, unsigned int), 0);
 			}
 			else if (format[i] == 'X')
 			{
-				ft_putnbr16(va_arg(args, unsigned int), 1);
+				count += ft_putnbr16(va_arg(args, unsigned int), 1);
 			}
 			else if (format[i] == 'p')
 			{
-				ft_putptr(va_arg(args, void *));
+				count += ft_putptr(va_arg(args, void *));
 			}
 			else if (format[i] == '%')
 			{
-				ft_putchar('%');
+				count += ft_putchar('%');
+				count++;
 			}
 		}
 		else
 		{
 			ft_putchar(format[i]);
+			count++;
 		}
 		i++;
 	}
@@ -184,8 +199,10 @@ int main()
 	int	*ptr;
 
 	ptr = malloc(5 * sizeof(int));
-	count = ft_printf("Esto es una prueba1: %s \n", "hola");
-	count2 = printf("Esto es una prueba2: %s \n", "hola");
+	count = ft_printf("Resultado1:%d", 7);
+	printf("\n");
+	count2 = printf("Resultado2:%d", 7);
+	printf("\n");
 	printf("%d\n", count);
 	printf("%d\n", count2);
 	free(ptr);
