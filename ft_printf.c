@@ -34,7 +34,7 @@ Completados:
 #include <stdlib.h>
 #include <unistd.h>
 
-int ft_putchar(char c)//c y %
+int ft_putchar(int c)//c y %
 {
 	write(1, &c, sizeof(char) * 1);
 	return (1);
