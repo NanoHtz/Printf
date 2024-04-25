@@ -13,16 +13,21 @@
 CC = gcc
 
 CFLAGS =-Wall -Wextra -Werror
-SRCES = ft_printf.c\
-		formatos.c
+
+INCLUDE = ft_printf.h
+
+SRCES = ft_printf.c \
+	formatos.c
+
 OBJS = $(SRCES:.c=.o)
 
 NAME = libftprintf.a
 
-ft_printf: $(OBJS)
-	$(CC) $(CFLAGS) -o ft_printf $(OBJS)
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c
+%.o: %.c $(INCLUDE)
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
-	rm -f $(OBJS) ft_printf
+	rm -f $(OBJS)
+
