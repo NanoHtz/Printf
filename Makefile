@@ -23,11 +23,19 @@ OBJS = $(SRCES:.c=.o)
 
 NAME = libftprintf.a
 
+all: $(NAME)
+
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c $(INCLUDE)
 	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	rm -f $(OBJS)
+
+fclean:
+	rm -f $(NAME)
+
+re: fclean all
 

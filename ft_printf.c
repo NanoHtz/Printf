@@ -12,6 +12,33 @@
 
 #include "ft_printf.h"
 
+int	type(char format,va_list args)
+{
+	int	count;
+
+	count = 0;
+	if (format == 'c')
+		count += ft_putchar(va_arg(args, int));
+	else if (format == 's')
+		count += ft_putstring(va_arg(args, char *));
+	else if (format == 'd' || format == 'i')
+		count += ft_putnbr(va_arg(args, int));
+	else if (format == 'u')
+		count += ft_putnbr_unsigned(va_arg(args, unsigned int));
+	else if (format == 'x')
+		count += ft_putnbr16(va_arg(args, unsigned int), 0);
+	else if (format == 'X')
+		count += ft_putnbr16(va_arg(args, unsigned int), 1);
+	else if (format == 'p')
+		count += ft_putptr(va_arg(args, void *));
+	else if (format == '%')
+	{
+		count += ft_putchar('%');
+		count++;
+	}
+	return (count);
+}
+
 int	ft_printf(const char *format,...)
 {
 	va_list	args;
@@ -26,39 +53,7 @@ int	ft_printf(const char *format,...)
 		if (format[i] == '%')
 		{
 			i++;
-			if (format[i] == 'c')
-			{
-				count += ft_putchar(va_arg(args, int));
-			}
-			else if (format[i] == 's')
-			{
-				count += ft_putstring(va_arg(args, char *));
-			}
-			else if (format[i] == 'd' || format[i] == 'i')
-			{
-				count += ft_putnbr(va_arg(args, int));
-			}
-			else if (format[i] == 'u')
-			{
-				count += ft_putnbr_unsigned(va_arg(args, unsigned int));
-			}
-			else if (format[i] == 'x')
-			{
-				count += ft_putnbr16(va_arg(args, unsigned int), 0);
-			}
-			else if (format[i] == 'X')
-			{
-				count += ft_putnbr16(va_arg(args, unsigned int), 1);
-			}
-			else if (format[i] == 'p')
-			{
-				count += ft_putptr(va_arg(args, void *));
-			}
-			else if (format[i] == '%')
-			{
-				count += ft_putchar('%');
-				count++;
-			}
+			count += type(format[i],args);
 		}
 		else
 		{
@@ -70,7 +65,7 @@ int	ft_printf(const char *format,...)
 	va_end(args);
 	return (count);
 }
-
+/*
 int main()
 {
 	int	count,count2,count3,count4;
@@ -94,4 +89,4 @@ int main()
 	printf("%d\n", count3);
 	printf("%d\n", count4);
 	return (0);
-}
+}*/

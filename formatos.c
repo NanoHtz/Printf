@@ -18,7 +18,7 @@ int ft_putchar(int c)//c y %
 	return (1);
 }
 
-char ft_putstring(char *str)//s
+int ft_putstring(char *str)//s
 {
 	int i;
 
