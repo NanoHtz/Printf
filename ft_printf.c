@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgalvez- <fgalvez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fgalvez- <fgalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:33:38 by fgalvez-          #+#    #+#             */
-/*   Updated: 2024/04/25 17:33:38 by fgalvez-         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:10:34 by fgalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_printf(const char *format,...)
 	va_end(args);
 	return (count);
 }
-/*
+
 int main()
 {
 	int	count,count2,count3,count4;
@@ -82,11 +82,11 @@ int main()
 	free(ptr);
 
 	//%s
-	count3 = ft_printf("Formato s:%s", "Hola");
+	count3 = ft_printf("Formato % %%s", "Hola"); //% %s ERROR SEGURO.
 	printf("\n");
-	count4 = printf("Formato s:%s", "Hola");
+	count4 = printf("Formato s:% %%s", "Hola");
 	printf("\n");
 	printf("%d\n", count3);
 	printf("%d\n", count4);
 	return (0);
-}*/
+}
