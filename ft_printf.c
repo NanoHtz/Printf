@@ -6,7 +6,7 @@
 /*   By: fgalvez- <fgalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:33:38 by fgalvez-          #+#    #+#             */
-/*   Updated: 2024/05/28 17:10:34 by fgalvez-         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:37:00 by fgalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ int main()
 
 	//%d
 	ptr = malloc(5 * sizeof(int));
-	count = ft_printf("Formato d:%d", 7);
+	count = ft_printf("Formato d:%c", 'a');
 	printf("\n");
-	count2 = printf("Formato d:%d", 7);
+	count2 = printf("Formato d:%c", 'a');
 	printf("\n");
 	printf("%d\n", count);
 	printf("%d\n", count2);
 	free(ptr);
 
 	//%s
-	count3 = ft_printf("Formato % %%s", "Hola"); //% %s ERROR SEGURO.
+	count3 = ft_printf("Formato s:%s", "Hola"); //% %s ERROR SEGURO.
 	printf("\n");
-	count4 = printf("Formato s:% %%s", "Hola");
+	count4 = printf("Formato s:%s", "Hola");
 	printf("\n");
 	printf("%d\n", count3);
 	printf("%d\n", count4);
