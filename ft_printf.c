@@ -6,13 +6,13 @@
 /*   By: fgalvez- <fgalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:33:38 by fgalvez-          #+#    #+#             */
-/*   Updated: 2024/05/28 21:37:00 by fgalvez-         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:08:43 by fgalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	type(char format,va_list args)
+int	type(char format, va_list args)
 {
 	int	count;
 
@@ -32,14 +32,11 @@ int	type(char format,va_list args)
 	else if (format == 'p')
 		count += ft_putptr(va_arg(args, void *));
 	else if (format == '%')
-	{
 		count += ft_putchar('%');
-		count++;
-	}
 	return (count);
 }
 
-int	ft_printf(const char *format,...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		i;
@@ -53,7 +50,7 @@ int	ft_printf(const char *format,...)
 		if (format[i] == '%')
 		{
 			i++;
-			count += type(format[i],args);
+			count += type(format[i], args);
 		}
 		else
 		{
@@ -66,27 +63,52 @@ int	ft_printf(const char *format,...)
 	return (count);
 }
 
-int main()
-{
-	int	count,count2,count3,count4;
-	int	*ptr;
-
-	//%d
-	ptr = malloc(5 * sizeof(int));
-	count = ft_printf("Formato d:%c", 'a');
-	printf("\n");
-	count2 = printf("Formato d:%c", 'a');
-	printf("\n");
-	printf("%d\n", count);
-	printf("%d\n", count2);
-	free(ptr);
-
-	//%s
-	count3 = ft_printf("Formato s:%s", "Hola"); //% %s ERROR SEGURO.
-	printf("\n");
-	count4 = printf("Formato s:%s", "Hola");
-	printf("\n");
-	printf("%d\n", count3);
-	printf("%d\n", count4);
-	return (0);
-}
+// int  main(void)
+// {
+//  char            *str;
+//  int             num;
+//  unsigned int    unum;
+//  void            *ptr;
+//  str = "";
+//  num = 4232412;
+//  unum = -42;
+//  ptr = &num;
+//  int ret1, ret2;
+//  printf("Testing string: \n");
+//  ret1 = printf("%s\n", str);
+//  ret2 = ft_printf("%s\n", str);
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing char: \n");
+//  ret1 = printf("%c\n", 'a');
+//  ret2 = ft_printf("%c\n", 'a');
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing integer: \n");
+//  ret1 = printf("%d\n", -2147483647);
+//  ret2 = ft_printf("%d\n", -2147483647);
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing unsigned integer: \n");
+//  ret1 = printf("%u\n", unum);
+//  ret2 = ft_printf("%u\n", unum);
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing hexadecimal: \n");
+//  ret1 = printf("%x\n", num);
+//  ret2 = ft_printf("%x\n", num);
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing uppercase hexadecimal: \n");
+//  ret1 = printf("%X\n", num);
+//  ret2 = ft_printf("%X\n", num);
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing pointer: \n");
+//  ret1 = printf("%p\n", ptr);
+//  ret2 = ft_printf("%p\n", ptr);
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing percentage: \n");
+//  ret1 = printf("%%\n");
+//  ret2 = ft_printf("%%\n");
+//  printf("printf returned: %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  printf("Testing NULL pointer: \n");
+//  ret1 = printf("%p\n", NULL);
+//  ret2 = ft_printf("%p\n", NULL);
+//  printf("printf returned : %d, ft_printf returned: %d\n\n", ret1, ret2);
+//  return (0);
+// }
